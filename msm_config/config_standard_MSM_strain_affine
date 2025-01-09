@@ -1,0 +1,17 @@
+--simval=2
+--sigma_in=2
+--sigma_ref=2
+--lambda=0
+--it=50
+--opt=AFFINE
+--CPgrid=0
+--SGgrid=0
+--datagrid=5
+--regoption=3
+--regexp=2
+--dopt=HOCR
+--VN
+--k_exponent=2
+--bulkmod=1.6
+--shearmod=0.4
+--rescaleL
