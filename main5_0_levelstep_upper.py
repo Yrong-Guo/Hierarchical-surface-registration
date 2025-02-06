@@ -12,8 +12,8 @@ sys.path.append("..")
 from test_deform import pairwise_reg_similarity
 
 # Define dataset paths (update as needed)
-MOVE_ROOT = '../Data_files/Subjects_IDs_HCP_moving_part'
-TARGET_ROOT = '../Data_files/Subjects_IDs_HCP_target_part'
+MOVE_ROOT = '../Data_files/Subjects_IDs_HCP_moving'
+TARGET_ROOT = '../Data_files/Subjects_IDs_HCP_target'
 
 # Define similarity metric names and corresponding indices
 SIMILARITY_METRICS = {

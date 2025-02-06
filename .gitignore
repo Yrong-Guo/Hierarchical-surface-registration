@@ -1,0 +1,14 @@
+__pycache__/
+*.log
+*.npy
+.DS_Store
+analysis_bashcode/
+main9_process/
+ohbm24/
+temporal_asymmetry/
+folding_asymmetry_languagescore.py
+stats.py
+temp
+temporal_myelin_asymmetry.py
+test_deform_global.py
+test_deforem_profile.py
