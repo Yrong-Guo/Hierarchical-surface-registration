@@ -1,0 +1,3 @@
+mkdir -p /HPC_work_dir/corrdice_affine_mask/checkNODE2133_msmrefine/;
+wb_command -metric-math '(x0+x1+x2+x3+x4+x5+x6)/7' /HPC_work_dir/corrdice_affine_mask/checkNODE2133_msmrefine/NODE2133.sulctemp0.affine.ico6.shape.gii -var x0 /HPC_work_dir/affined_sulc/128026.L.sulc.affine.ico6.shape.gii -var x1 /HPC_work_dir/affined_sulc/139637.L.sulc.affine.ico6.shape.gii -var x2 /HPC_work_dir/affined_sulc/677968.L.sulc.affine.ico6.shape.gii -var x3 /HPC_work_dir/affined_sulc/117122.L.sulc.affine.ico6.shape.gii -var x4 /HPC_work_dir/affined_sulc/117122.R.sulc.affine.ico6.shape.gii -var x5 /HPC_work_dir/affined_sulc/561444.L.sulc.affine.ico6.shape.gii -var x6 /HPC_work_dir/affined_sulc/660951.L.sulc.affine.ico6.shape.gii &
+wait;
