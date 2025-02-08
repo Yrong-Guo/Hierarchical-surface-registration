@@ -14,3 +14,11 @@ test_deform_global.py
 test_deforem_profile.py
 main5_0_levelstep_frontal.py
 main5_0_levelstep_globalhemi.p.py
+main5_1_2_lowerlevel_tempmatch.py
+main6_tempasymmetry_get_cluster_ID.py
+main6_tempasymmetry_predictlanguage.py
+main7_meanstd.py
+main8_combine_lobe_reg_dropdistortion.py
+main9_applytoUKB_findcluster.py
+main9_applytoUKB_findcluster_profile.py
+
