@@ -7,13 +7,13 @@ from get_clusters_with_thre import leaf_in_cluster,get_clusters_with_thre
 from wbtools_light_subtemp import msm_reg_template_2,generate_average_metric_command_unbiastemp,generate_average_metric_command,curv_warp_to_sulc
 
 
-lobe = 'parietal'
+lobe = 'frontal'
 simi_method = 'corrdice'
 partition = 'cpu'
 n_hemi = 2220
 subject_list = '../Data_files/Subjects_IDs_HCP_all_LR'
 sub_cluster_size = 25
-create_work_dir='/scratch/prj/cortical_imaging/Yourong/hierarch/'+lobe+'_lobe/subtemps'
+create_work_dir='/HPC_work_dir/'+lobe+'_lobe/subtemps'
 total_iter_num = 20
 converge_thre = 0.006
 
@@ -380,12 +380,12 @@ for cnt, temp in enumerate(inter_templates):
                     '\n'
                     'sleep_time=300 # seconds\n'
                     '# check to see if job is running\n'
-                    'status=`squeue -u k21065258 | grep $QID1_2_id`\n'
+                    'status=`squeue -u ${USER_NAME} | grep $QID1_2_id`\n'
                     '# while $status is not empty\n'
                     'while [ -n "$status" ]\n'
                     '    do\n'
                     '        sleep $sleep_time\n'
-                    '        status=`squeue -u k21065258 | grep $QID1_2_id`\n'
+                    '        status=`squeue -u ${USER_NAME} | grep $QID1_2_id`\n'
                     '    done\n'
                     '\n'
                     'iter=1\n'
@@ -419,12 +419,12 @@ for cnt, temp in enumerate(inter_templates):
                     '\n'
                     '    echo "iter ${iter}: job submitted!"\n'
                     '    # check to see if job is running\n'
-                    '    status=`squeue -u k21065258 | grep $QID1_2_id`\n'
+                    '    status=`squeue -u ${USER_NAME} | grep $QID1_2_id`\n'
                     '    # while $status is not empty\n'
                     '    while [ -n "$status" ]\n'
                     '        do\n'
                     '            sleep $sleep_time\n'
-                    '            status=`squeue -u k21065258 | grep $QID1_2_id`\n'
+                    '            status=`squeue -u ${USER_NAME} | grep $QID1_2_id`\n'
                     '        done\n'
                     '    # update diff\n'
                     '    sleep $sleep_time\n'
