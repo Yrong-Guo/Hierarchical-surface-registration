@@ -28,16 +28,10 @@ msm_config
 corrdice_affine_mask save process for each template
 
 """
-import shutil
 
-import numpy as np
-import os
 import pandas as pd
 from utils.wbtools_light import msm_reg_template_2,generate_average_metric_command_unbiastemp,generate_average_metric_command,curv_warp_to_sulc#,modify_sphere
-from get_clusters_with_thre import leaf_in_cluster
-import subprocess
-import multiprocessing
-import matplotlib.pyplot as plt
+from main5_levelstep.HPC_working_dir.main5_1_template_generation.get_clusters_with_thre import leaf_in_cluster
 
 level = 0
 lobe = 'frontal'
