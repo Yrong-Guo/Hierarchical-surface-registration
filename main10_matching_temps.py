@@ -6,19 +6,16 @@ figure out which temps of HCP are not matched well with neonates, which means th
 '''
 import numpy as np
 import nibabel as nb
-# from skimage.exposure import match_histograms
-# from skimage.metrics import structural_similarity as ssim
 import matplotlib.pyplot as plt
 import seaborn as sns
 import copy
 from scipy.optimize import linear_sum_assignment
-from scipy.spatial.distance import pdist, squareform
 from scipy.cluster.hierarchy import dendrogram, linkage, optimal_leaf_ordering,leaves_list
-from skimage.exposure import match_histograms
+
 
 
 lobe='temporal'
-
+working_dir = '/working_directory/'
 hcp_30=open('../matching_neonate_Temps/hcp_temp_only30_'+lobe).read().splitlines()
 neo_30=open('../matching_neonate_Temps/neo_temp_only30_'+lobe).read().splitlines()
 
@@ -56,11 +53,11 @@ def DiceFun(x,y,mask=None):
 
 corr_hcp_neo_mtx = np.zeros((30,30))
 for i,sub_hcp in enumerate(hcp_30):
-    sub_hcp_temp_img = nb.load(f'/home/yg21/YourongGuo/normativemodel/hierarc_hcp/msm_HT/final_temp/{lobe}/{sub_hcp}.curv.affine.ico6.shape.gii').darrays[0].data
-    lobe_mask = nb.load(f'/home/yg21/YourongGuo/normativemodel/hierarc_hcp/msm_HT/lobe_msk/{lobe}/{sub_hcp}_{lobe}_mask.shape.gii').darrays[0].data
+    sub_hcp_temp_img = nb.load(f'{working_dir}/msm_HT/final_temp/{lobe}/{sub_hcp}.curv.affine.ico6.shape.gii').darrays[0].data
+    lobe_mask = nb.load(f'{working_dir}/msm_HT/lobe_msk/{lobe}/{sub_hcp}_{lobe}_mask.shape.gii').darrays[0].data
     for j,sub_neo in enumerate(neo_30):
         sub_neo_temp_img = nb.load(
-            f'/home/yg21/YourongGuo/normativemodel/hierarc_hcp/matching_neonate_Temps/{lobe}_lobe/Neo_{sub_neo}.msm_unbiased.HCP_{sub_hcp}.curv.affine.ico6.shape.gii').darrays[
+            f'{working_dir}/matching_neonate_Temps/{lobe}_lobe/Neo_{sub_neo}.msm_unbiased.HCP_{sub_hcp}.curv.affine.ico6.shape.gii').darrays[
             0].data
         # hcp_matched = match_histograms(sub_hcp_temp_img, sub_neo_temp_img)
         corr_hcp_neo_mtx[i,j]=corr_similarity(sub_hcp_temp_img,sub_neo_temp_img,lobe_mask)
@@ -86,27 +83,6 @@ reordered_corr_mtx = reordered_corr_mtx[:, col_indices]
 reordered_hcp_30 = [hcp_30[i] for i in hcp_order]
 reordered_neo_30 = [neo_30[i] for i in col_indices]
 
-
-# # Define a cost matrix where the cost is the negative of the correlation matrix
-# # This turns the problem into a maximization problem
-# cost_matrix = -corr_hcp_neo_mtx
-#
-# # Use linear sum assignment to find the best row-column pairing that maximizes the diagonal
-# row_indices, col_indices = linear_sum_assignment(cost_matrix)
-#
-# # Reorder the matrix according to the optimal assignment
-# reordered_corr_mtx = corr_hcp_neo_mtx[np.ix_(row_indices, col_indices)]
-#
-# # Reorder the labels
-# reordered_hcp_30 = [hcp_30[i] for i in row_indices]
-# reordered_neo_30 = [neo_30[i] for i in col_indices]
-
-
-
-# Create a heatmap of the reordered matrix
-# frontal vmin= 0.6,vmax=0.85
-# parietal vmin= 0.7, vmax=0.9
-# temporal vmin = 0.75, vmax = 0.85
 if lobe == 'frontal':
      vmin= 0.65
      vmax=0.9
