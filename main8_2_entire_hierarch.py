@@ -1,18 +1,20 @@
 '''register individual subject to 3 first template take turns in 3 level'''
 
-from utils.hierarch_tools import leaf_in_cluster, hierarch_path_dict
-from get_clusters_with_thre import leaf_in_cluster,get_clusters_with_thre
 import pandas as pd
-import numpy as np
+import os
 
 
 
 '''settings'''
 simi_method = 'corrdice'
-log_dir = '/scratch/prj/cortical_imaging/Yourong/hierarch/combine/newtemp/log'
-code_dir = '/scratch/prj/cortical_imaging/Yourong/hierarch/combine/newtemp/bash_code'
+HPC_work_dir = os.getenv("HPC_WORK_DIR", "/default/path/to/HPC_work_dir")
+log_dir = os.path.join(HPC_work_dir, "log")
+code_dir = os.path.join(HPC_work_dir, "newtemp", "bash_code")
 
 subject_list = '../Data_files/Subjects_IDs_HCP_all_LR'
+if not os.path.exists(subject_list):
+    raise FileNotFoundError(f"Subject list not found: {subject_list}")
+
 subjects_all = open(subject_list).read().splitlines()
 
 

@@ -1,12 +1,11 @@
 '''
-concatenate between-templates registration together
+concatenate between-templates registration following the hierarchical path
 
 This is the latest version 2024.3.3_yourong
 '''
 
 import numpy as np
 from utils.hierarch_tools import leaf_in_cluster, hierarch_path_dict
-from utils.concatenate_function import concatenate_warps
 from get_clusters_with_thre import leaf_in_cluster,get_clusters_with_thre
 import pandas as pd
 
@@ -33,7 +32,6 @@ if simi_method == 'corrdice':
     elif lobe == 'temporal':
         cluster_thre = 0.365
 
-### TODO:frontal corrmse 0.28 corrdice 0.38  ### parietal corrdice 0.477 corrmse 0.371 ### temporal corrdice 0.365 corrmse 0.247
 # get threshold template
 temps_30 = get_clusters_with_thre(merge_path,subject_list =subject_list,cluster_thre=cluster_thre,size=True,rt_temp=True )
 

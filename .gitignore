@@ -23,3 +23,5 @@ main9_applytoUKB_findcluster.py
 main9_applytoUKB_findcluster_profile.py
 main8_combine_lobe_reg_v1.py
 main5_1_1_lowerlevel_hierarchy.py
+main8_1_subject_reg_first_templates.py
+main8_2_entire_hierarch.py

@@ -42,7 +42,7 @@ children_distance = np.load('dendrogram_'+lobe+'/children_distance_cc_'+lobe+'_'
 
 similarity_score = pd.DataFrame(children_distance, index=None, columns=['sub1', 'sub2', 'distance', 'cluster_size'])
 
-subjects = open('../Data_files/Subjects_IDs_HCP_all_LR' , "r").read().splitlines()
+subjects = open('Data_files/Subjects_IDs_HCP_all_LR', "r").read().splitlines()
 
 # save this hierarchical path into the pandas data frame style. This file is important because we need to registration following the hierarchy in it.
 for i in range(len(similarity_score)):

@@ -45,12 +45,9 @@ elif lobe == 'frontal':
     exclude_cluster = np.asarray(['NODE1910', 'NODE2115','NODE2147'])
     cluster_thre = 0.38
 
-merge_path = 'dendrogram_'+lobe+'/mergeprocess_'+lobe+'_'+simi_method+'_affine_mask_complete_0.pkl' #TODO: change it back to '+lobe+', now is just testing code using frontal lobe
+merge_path = 'dendrogram_'+lobe+'/mergeprocess_'+lobe+'_'+simi_method+'_affine_mask_complete_0.pkl'
 temps_30 = get_clusters_with_thre(merge_path,subject_list =subject_list,cluster_thre=cluster_thre,size=True,rt_temp=True )
-### frontal corrmse 0.28 corrdice 0.38  ### parietal corrdice 0.477 corrmse 0.371 ### temporal corrdice 0.365 corrmse 0.247
-# exclude_cluster = np.asarray(['NODE2066', 'NODE2107', 'NODE2119', 'NODE2137', 'NODE2144'])
 temps_30 = np.setdiff1d(temps_30, exclude_cluster)
-
 
 
 
@@ -70,7 +67,6 @@ for temp in temps_30:
         if '.L' in sub:
             cnt_L+=1
         sub_id = np.where(subject_all == sub)[0][0]
-        # ratio_cluster.append(gyral_ratio[sub_id])
 
     gyral_ratio_clusters.append(np.mean(ratio_cluster))
 
@@ -82,10 +78,7 @@ for temp in temps_30:
 
 
 
-
-# print(cnt_Left_rate)
 template_info = np.asarray([temps_30, cnt_sub_percent, cnt_sub_size, cnt_Left_rate,cnt_left,gyral_ratio_clusters]).T
-# pd.DataFrame(template_info,columns=['templates', 'frequency','sizes', 'left_rate']).to_csv('dendrogram_'+lobe+'/folding_template_freq.csv')
 freq_result = pd.DataFrame(template_info,columns=['templates', 'frequency','sizes', 'left_rate','left_num','gyral_ratio_sts'])
 freq_result['sizes'] = freq_result['sizes'].astype('int')
 freq_result['left_num'] = freq_result['left_num'].astype('int')
@@ -96,7 +89,6 @@ freq_result['gyral_ratio_sts'] = freq_result['gyral_ratio_sts'].astype('float64'
 freq_result.to_csv(lobe+'_lobe_freq_result_30.csv',index=False)
 
 # sort freq_Result by left rate
-
 # freq_result = freq_result.sort_values(by=['left_rate'])
 
 
@@ -113,83 +105,34 @@ if sort_lhr == True:
 mannwhitney U
 '''
 
-# freq_result = []
-# for lobe_i in ['frontal','parietal','temporal']:
-#     freq_result.append(pd.read_csv(lobe_i+'_lobe_freq_result_30.csv')['left_rate'].to_numpy())
-#
-# p_values = []
-# # compare temporal parietal
-# stat, p_value_fp = mannwhitneyu(freq_result[2], freq_result[1], alternative='two-sided')
-# print(f'Temporal vs Parietal: U={stat}, p={p_value_fp}')
-# p_values.append(p_value_fp)
-#
-# # compare temporal frontal
-# stat, p_value_fp = mannwhitneyu(freq_result[2], freq_result[0], alternative='two-sided')
-# print(f'Temporal vs Frontal: U={stat}, p={p_value_fp}')
-# p_values.append(p_value_fp)
-#
-# # compare parietal frontal
-# stat, p_value_fp = mannwhitneyu(freq_result[1], freq_result[0], alternative='two-sided')
-# print(f'Parietal vs Frontal: U={stat}, p={p_value_fp}')
-# p_values.append(p_value_fp)
+freq_result = []
+for lobe_i in ['frontal','parietal','temporal']:
+    freq_result.append(pd.read_csv(lobe_i+'_lobe_freq_result_30.csv')['left_rate'].to_numpy())
+
+p_values = []
+# compare temporal parietal
+stat, p_value_fp = mannwhitneyu(freq_result[2], freq_result[1], alternative='two-sided')
+print(f'Temporal vs Parietal: U={stat}, p={p_value_fp}')
+p_values.append(p_value_fp)
+
+# compare temporal frontal
+stat, p_value_fp = mannwhitneyu(freq_result[2], freq_result[0], alternative='two-sided')
+print(f'Temporal vs Frontal: U={stat}, p={p_value_fp}')
+p_values.append(p_value_fp)
+
+# compare parietal frontal
+stat, p_value_fp = mannwhitneyu(freq_result[1], freq_result[0], alternative='two-sided')
+print(f'Parietal vs Frontal: U={stat}, p={p_value_fp}')
+p_values.append(p_value_fp)
 
 
-# _, corrected_p_values, _, _ = multipletests(p_values, method='fdr_bh')
+_, corrected_p_values, _, _ = multipletests(p_values, method='fdr_bh')
 
-# # Print corrected p-values
-# for i, corrected_p in enumerate(corrected_p_values):
-#     print(f'Corrected p-value for comparison {i+1}: {corrected_p}')
-
-'''
-(Not used)
-chi-square test / fisher test
-contingency_table [observed expected]
-'''
-
-p_val_LRbias=[]
-for t in freq_result['templates'].to_numpy():
-    temp = template_info[np.where(t==template_info)[0][0],:]
-    freq_left = temp[4].astype('int')
-    freq_right = temp[2].astype('int')-temp[4].astype('int')
-    freq_half = round(temp[2].astype('int')/2)
-    contingency_table = np.asarray([[freq_left , freq_half] , [freq_right , freq_half]])
-    observed = np.asarray([freq_left,freq_right])
-    expected = np.asarray([freq_half,freq_half])
-
-    # if min(freq_left,freq_right) < 5:
-    stat_fit,p_val = fisher_exact(contingency_table)
-    # else:
-    #     stat_fit,p_val = chisquare(observed)
-
-    p_val_LRbias.append(p_val)
-
-p_val_LRbias = np.asarray(p_val_LRbias)*len(template_info) # did correction
-# freq_result_significant = freq_result.iloc[np.where(p_val_LRbias<0.05)].index
-freq_result_significant = np.where(p_val_LRbias<0.05)
-# np.save('freq_result_significant_'+lobe,freq_result_significant)
+# Print corrected p-values
+for i, corrected_p in enumerate(corrected_p_values):
+    print(f'Corrected p-value for comparison {i+1}: {corrected_p}')
 
 
-'''
-generate merging command for significant biased cluster - for visual check
-'''
-# sig_index = freq_result_significant.to_numpy().astype('int')
-# temps_30 = np.asarray(temps_30)
-# commands = ''
-# for i, temp in enumerate(temps_30[sig_index]):
-#     subjects = cluster_subject[temp]
-#     command='wb_command -metric-merge '
-#     if cnt_Left_rate[sig_index[i]] > 0.5:
-#         bias = 'biasL'
-#     else:
-#         bias = 'biasR'
-#     output='/home/yg21/YourongGuo/normativemodel/hierarc_hcp/main5_levelstep/merge_temporal_asymmety/'+temp+'.'+bias+'.'+lobe+'.merge.shape.gii'
-#     metrics = []
-#     for sub in subjects:
-#         metrics.append('-metric /home/yg21/YourongGuo/normativemodel/code/affined_curv/'+sub+'.curv.affine.ico6.shape.gii')
-#
-#     command = command+output+' '+' '.join(metrics)+'\n'
-#
-#     commands+=command
 
 
 
@@ -217,10 +160,6 @@ plt.plot()
 plt.show()
 
 
-
-
-
-
 '''Left hemisphere proportion'''
 
 sns.set_theme(style="whitegrid")
@@ -236,13 +175,12 @@ g.set_axis_labels("", "Left hemisphere proportion")
 g.set(ylim=(0, 1.2))
 
 l1, = plt.plot(0.5*np.ones(len(freq_result)), linewidth=2, color='r')  # average
-l2 = plt.scatter(freq_result_significant, freq_result['left_rate'].iloc[freq_result_significant], color='b', marker='*')  # significance
 
 # Get the handles and labels from the bar legend created by Seaborn
 bar_handles, bar_labels = g.ax.get_legend_handles_labels()
 
 # Create the custom legend handles and labels
-custom_handles = [l1, l2]
+custom_handles = [l1]
 custom_labels = ['0.5', 'Significance']
 
 # Combine the handles and labels from both legends

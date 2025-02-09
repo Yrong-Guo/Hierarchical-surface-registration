@@ -17,8 +17,8 @@ initialise
 '''
 lobe='temporal'
 simi_method = 'corrdice'
-code_dir = '/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/'+lobe+'_lobe/level5_unbias_corrdice/msm_merge_files_'+lobe
-log_dir = '/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/'+lobe+'_lobe/level5_unbias_corrdice/log_higher'
+code_dir = '/HPC_work_dir/'+lobe+'_lobe/level5_unbias_corrdice/msm_merge_files_'+lobe
+log_dir = '/HPC_work_dir/'+lobe+'_lobe/level5_unbias_corrdice/log_higher'
 """================================Pairwise registration according to the dendrogram_'+lobe+'================================"""
 # get hierarchy file
 merge_path = 'dendrogram_'+lobe+'/mergeprocess_'+lobe+'_'+simi_method+'_affine_mask_complete_0.pkl' #TODO: change it back to '+lobe+', now is just testing code using frontal lobe
@@ -67,9 +67,9 @@ for j in range(start_index, len(merge)):
 
     """msm_reg bash creation"""
     msm_reg(A, B, combined,
-            '/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask/hierarch_reg_process/',
-            '/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask/final_temps/',
-            work_dir = '/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask/',
+            '/HPC_work_dir/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask/hierarch_reg_process/',
+            '/HPC_work_dir/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask/final_temps/',
+            work_dir = '/HPC_work_dir/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask/',
             sub_dir = '/scratch/prj/cortical_imaging_dhcp/Yourong/affined_features/',
             inter_templates=inter_templates,
             leaf_A=leaf_cluster_A,leaf_B=leaf_cluster_B,leaf_combine=leaf_cluster_combined,lobe=lobe)

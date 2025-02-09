@@ -26,7 +26,6 @@ simi_method = 'corrdice'
 subject_list = '../Data_files/Subjects_IDs_HCP_all_LR'
 n_hemi = 2220
 
-# gyral_ratio = np.load('/home/yg21/YourongGuo/normativemodel/calculate_GI/gyral_ratio_all.npy')
 subject_all = np.asarray(open(subject_list).read().splitlines())
 
 '''
@@ -46,8 +45,6 @@ elif lobe == 'frontal':
 
 merge_path = 'dendrogram_'+lobe+'/mergeprocess_'+lobe+'_'+simi_method+'_affine_mask_complete_0.pkl' #TODO: change it back to '+lobe+', now is just testing code using frontal lobe
 temps_30 = get_clusters_with_thre(merge_path,subject_list =subject_list,cluster_thre=cluster_thre,size=True,rt_temp=True )
-### frontal corrmse 0.28 corrdice 0.38  ### parietal corrdice 0.477 corrmse 0.371 ### temporal corrdice 0.365 corrmse 0.247
-# exclude_cluster = np.asarray(['NODE2066', 'NODE2107', 'NODE2119', 'NODE2137', 'NODE2144'])
 temps_30 = np.setdiff1d(temps_30, exclude_cluster)
 
 
