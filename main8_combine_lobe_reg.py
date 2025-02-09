@@ -10,17 +10,17 @@ from get_clusters_with_thre import leaf_in_cluster,get_clusters_with_thre
 import pandas as pd
 
 '''settings'''
-lobe = 'frontal'
+lobe = 'parietal'
 simi_method = 'corrdice'
 merge_path = 'dendrogram_'+lobe+'/mergeprocess_'+lobe+'_'+simi_method+'_affine_mask_complete_0.pkl'
 subject_list = '../Data_files/Subjects_IDs_HCP_all_LR'
 
 
 # on CREATE
-work_dir = '/scratch/prj/cortical_imaging/Yourong/hierarch/combine/HTconcate'
+work_dir = '/your_HPC_working_dir'
 log_dir = work_dir+'/log'
 code_dir = work_dir+'/bash_code'
-template_dir = '/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask'
+template_dir = work_dir+'/'+lobe+'_lobe/level5_unbias_corrdice/corrdice_affine_mask'
 
 
 # check 30 template threshold
@@ -78,8 +78,8 @@ f_queue_reg.write('#!/bin/bash -l\n'
                     'TAR_LIST=($(<'+code_dir + '/' + lobe+'_temp_tar_list))\n'
                     'TAR=${TAR_LIST[${SLURM_ARRAY_TASK_ID}]}\n'
                     ''
-                    'newmsm --inmesh=/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/sunet.ico-6.surf.gii '
-                    '--refmesh=/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/sunet.ico-6.surf.gii '
+                    f'newmsm --inmesh={work_dir}/sunet.ico-6.surf.gii '
+                    f'--refmesh={work_dir}/sunet.ico-6.surf.gii '
                     '--indata='+template_dir+'/final_temps/${MOV}.curv.affine.ico6.shape.gii '
                     '--refdata='+template_dir+'/final_temps/${TAR}.curv.affine.ico6.shape.gii '
                     '--inweight='+template_dir+'/temp_lobe_mask/NODE2218_'+lobe+'_mask_smth.shape.gii '
@@ -103,7 +103,7 @@ for node in temps_30:
 
     f_concate = open('concate_bashcode/concate_temp'+node+'_'+lobe+'.sh','w')
     f_concate.write('reg_folder='+work_dir+'/concatenate_reg\n'
-                    'ico_6=/scratch/prj/cortical_imaging_dhcp/Yourong/hierarch/sunet.ico-6.surf.gii\n'
+                    f'ico_6={work_dir}/sunet.ico-6.surf.gii\n'
                     'output_dir='+work_dir+'/concatenate_process\n'
                     'output_dir_metrics='+work_dir+'/concatenate_process_metrics\n')
 
