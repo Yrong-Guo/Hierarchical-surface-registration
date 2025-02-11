@@ -2,6 +2,8 @@
 
 This repository contains Python scripts and SLURM bash code to perform hierarchical surface registration and template concatenation for brain imaging analysis. The downstream analysis codes are also provided.
 
+[Figure_method_overview_increaselobecombine.pdf](https://github.com/user-attachments/files/18749431/Figure_method_overview_increaselobecombine.pdf)
+
 ## Requirements
 
 ### Python libraries
