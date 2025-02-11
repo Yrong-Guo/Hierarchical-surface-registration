@@ -32,8 +32,11 @@ Run `main5_1_cluster_savehie.py` to generate hierarchical dendrograms and cluste
 
 ### Step 3: Generating cortical folding motifs
 Run `/HPC_working_dir/main5_1_template_generation/level5_unbias_template_generate_dhcp_light.py` to generate SLURM bash code for template generation.
+
 One bash code generated example is in /HPC_working_dir/main5_1_template_generation/code_level_5/frontal.
+
 In `code_pairwise_corrdice`, run `queue_sulctemp0.sh` to create initial templates by averaging across rigidly aligned examples
+
 In `code_iter_corrdice`, run `submit_code_NODEXXX.sh` to iteratively refine and update the templates. 
 
 ### Step 4: Generating higher-level intermediate templates at the nodes of the dendrogram
@@ -41,7 +44,9 @@ Run `main5_2_higherlevel_hierarchy.py` to generate bash code to pairwise registe
 
 ### Step 5: Registering individual hemispheres to the HT-PA
 Run `main8_combine_lobe_reg.py` to generate bash code - do surface registrations between templates following the dendrogram.
+
 The example code are in /HPC_working_dir/main_8_HTconcate_bashcode. Run `queue_reg_temps_{lobe}.sh` and queue_concate_temps_{lobe}.sh
+
 Run `/HPC_working_dir/main_8_HTconcate_bashcode/subject_reg/queue_subject_reg.sh` to iteratively register a single hemisphere to templates in three lobes.
 
 
