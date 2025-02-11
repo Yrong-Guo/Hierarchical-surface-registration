@@ -24,5 +24,9 @@ This repository contains Python scripts and SLURM bash code to perform hierarchi
 
 ## Workflow
 
-### Step 1: calculating the pairwise similarities
+### Step 1: Calculating the pairwise similarities
+Run 'main5_0_levelstep_upper.py' to calculate the pairwise similarity matrices. The similarity can be measured by CC, DICE, MSE, or  MI. In the paper we combine CC and DICE.
+
+### Step 2: Hierarchical clustering
+
 
