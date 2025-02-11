@@ -22,7 +22,7 @@ This repository contains Python scripts and SLURM bash code to perform hierarchi
 - **[newMSM](https://github.com/rbesenczi/newMSM)**: Software for surface registration - Multimodel Surface Mapping.
 - **[SLURM](https://slurm.schedmd.com/overview.html)**: A job scheduler for High-Performance Computing (HPC).
 
-## Workflow
+## Method Workflow
 
 ### Step 1: Calculating the pairwise similarities
 Run `main5_0_levelstep_upper.py` to calculate the pairwise similarity matrices. The similarity can be measured by CC, DICE, MSE, or  MI. In the paper we combine CC and DICE.
@@ -48,6 +48,11 @@ Run `main8_combine_lobe_reg.py` to generate bash code - do surface registrations
 The example code are in /HPC_working_dir/main_8_HTconcate_bashcode. Run `queue_reg_temps_{lobe}.sh` and queue_concate_temps_{lobe}.sh
 
 Run `/HPC_working_dir/main_8_HTconcate_bashcode/subject_reg/queue_subject_reg.sh` to iteratively register a single hemisphere to templates in three lobes.
+
+## Analysis
+
+### Asymmetry
+
 
 
 
