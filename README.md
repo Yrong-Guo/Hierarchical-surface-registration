@@ -8,15 +8,21 @@ This repository contains Python scripts and SLURM bash code to perform hierarchi
 ## Requirements
 
 ### Python libraries
- - numpy
- - nibabel
- - pandas
- - matplotlib
- - see requirements of [DDR](https://github.com/mohamedasuliman/DDR)
+ - `numpy`
+ - `nibabel`
+ - `scikit-learn` (for clustering and other ML tools)
+ - `scipy` (for statistical test, e.g. wilcoxon, ttest_rel)
+ - `pandas`
+ - `seaborn`
+ - `matplotlib`
+ - For libraries regarding DDR training, please see requirements of [DDR](https://github.com/mohamedasuliman/DDR)
 
 ### External tools
 - **Workbench (wb_command)**: [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench).
 - **[newMSM](https://github.com/rbesenczi/newMSM)**: Software for surface registration - Multimodel Surface Mapping.
 - **[SLURM](https://slurm.schedmd.com/overview.html)**: A job scheduler for High-Performance Computing (HPC).
 
+## Workflow
+
+### Step 1: calculating the pairwise similarities
 
