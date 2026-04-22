@@ -23,8 +23,12 @@ This repository contains Python scripts and SLURM bash code to perform hierarchi
 - **Workbench (wb_command)**: [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench).
 - **[newMSM](https://github.com/rbesenczi/newMSM)**: Software for surface registration - Multimodel Surface Mapping.
 - **[SLURM](https://slurm.schedmd.com/overview.html)**: A job scheduler for High-Performance Computing (HPC).
+- **[DDR](https://github.com/mohamedasuliman/DDR)**: The deep learning-based surface registration model used in the current paper for computing similarity matrices.
 
 ## Method Workflow
+### Data preparation
+Resample the native sulcal depth maps into [ico6 sphere](https://github.com/mohamedasuliman/DDR/blob/main/icosphere/r100/ico-6.surf.gii).
+Use [DDR affine](https://github.com/mohamedasuliman/DDR/tree/main) to prerotate all the sulcap depth maps to [FS_LR sulcal template](https://github.com/Washington-University/HCPpipelines/blob/master/global/templates/standard_mesh_atlases/L.refsulc.164k_fs_LR.shape.gii) space.
 
 ### Step 1: Calculating the pairwise similarities
 Run `main5_0_levelstep_upper.py` to calculate the pairwise similarity matrices. The similarity can be measured by CC, DICE, MSE, or  MI. In the paper we combine CC and DICE.
