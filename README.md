@@ -1,7 +1,9 @@
 # Hierarchical-surface-registration
 
 
-This repository contains Python scripts and SLURM bash code to perform hierarchical surface registration and template concatenation for brain imaging analysis. The downstream analysis codes are also provided.
+This repository provides Python scripts and SLURM workflows for hierarchical surface registration and template concatenation in cortical surface analysis. The pipeline implements a multi-stage registration framework for aligning individual cortical surfaces to motif-based template spaces. 
+
+The repository accompanies the study [_"Motifs of brain cortical folding from birth to adulthood: structural asymmetry and folding-functional links"_](https://www.biorxiv.org/content/10.1101/2025.03.04.641459v1)), and includes code for both the registration pipeline and downstream analyses.
 
 
 ![‎Figure_method_overview_increaselobecombine ‎001](https://github.com/user-attachments/assets/79727233-467d-43a3-a897-62d68fc70801)
