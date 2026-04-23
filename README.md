@@ -55,12 +55,10 @@ The example code are in /HPC_working_dir/main_8_HTconcate_bashcode. Run `queue_r
 
 Run `/HPC_working_dir/main_8_HTconcate_bashcode/subject_reg/queue_subject_reg.sh` to iteratively register a single hemisphere to templates in three lobes.
 
-## Analysis
 
-### Asymmetry
+## The output of this pipeline includes:
+ - Deformation spheres mapping each individual from native space to lobe-specific template spaces (frontal, parieto-occipital, and temporal lobes), and
+ - Combined deformation spheres that iteratively align all lobes to their corresponding folding motifs, integrating deformations across three lobes. 
 
-updating...
-
-
-
+They are available for download in [Zenodo](https://doi.org/10.5281/zenodo.19692916).
 
